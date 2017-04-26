@@ -1,5 +1,5 @@
 import tkinter 
-import levels
+import betterproject
 from PIL import Image, ImageTk
 import tkinter.messagebox
 
@@ -45,7 +45,7 @@ class StartMenu:
     #def tutorial(self):
     def startgame(self):
         self.main_window.destroy()
-        levels.levels()
+        betterproject.startgame()
 
     def popup(self):
         #self.message = "Are you sure you want to quit"
@@ -59,3 +59,4 @@ def main():
 
 main()
         
+
