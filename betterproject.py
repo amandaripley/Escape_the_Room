@@ -1,9 +1,9 @@
 import tkinter
 from PIL import Image, ImageTk
+#import pydub
 
 #model
 class Arrow:
-
     def __init__(self, window, color='red', direction='left',X=0):
         self.color = color
         self.direction = direction
@@ -29,6 +29,24 @@ class Arrow:
             self.window.canvas.itemconfig(self.window.currentimage,image=self.window.walls[(self.X+1)%len(self.window.walls)])
             self.window.arrow1.X=(self.X+1)%len(self.window.walls)
             self.window.arrow2.X=(self.X+1)%len(self.window.walls)
+        if self.X == 1:
+            self.speaker = Speaker(self.window)
+        else:
+            self.window.canvas.delete(self.speaker.idnumber)
+
+class Speaker:
+    def __init__(self, window):
+        self.window = window
+        self.a = 360
+        self.b = 138
+        self.c = 380
+        self.d = 183
+        self.idnumber = self.window.canvas.create_rectangle(self.a,self.b,self.c,self.d,outline = "")
+        self.window.canvas.tag_bind(self.idnumber, "<Button-1>", self.click)
+
+    def click(self,event):
+        print("click!")
+
 #view
 class Window:
     def __init__(self):
@@ -36,7 +54,7 @@ class Window:
         self.canvas = tkinter.Canvas(self.window,width=800,height=600)
         self.canvas.grid()
         basepath = "C:/Users/sarah/OneDrive/Documents/CS 110/"
-        paths = ["BalconyChairs.gif", "BalconyDoortoBdr.gif", "BRTV.gif", "BalconyWall.gif"]
+        paths = ["image1_3_.gif", "image3.gif","image4.gif", "image2.gif"]
         self.walls = [tkinter.PhotoImage(file = basepath + path) for path in paths]
         self.currentimage = self.canvas.create_image(400,300,image=self.walls[0])
         self.arrow1 = Arrow(self)
@@ -46,6 +64,7 @@ class Window:
     def mainLoop(self):
         self.window.mainloop()
 
+#controller
 def main():
     window = Window()
     window.mainLoop()
