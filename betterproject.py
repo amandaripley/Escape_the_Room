@@ -1,6 +1,7 @@
 import tkinter
+from tkinter import simpledialog, messagebox
 from PIL import Image, ImageTk
-#import pydub
+import winsound
 
 #model
 class Arrow:
@@ -45,7 +46,12 @@ class Speaker:
         self.window.canvas.tag_bind(self.idnumber, "<Button-1>", self.click)
 
     def click(self,event):
-        print("click!")
+        winsound.PlaySound("C:/Users/sarah/OneDrive/Documents/CS 110/Believer.wav",winsound.SND_FILENAME)
+        clue = simpledialog.askstring("Input", "What is the name of this song?")
+        if clue == "Believer":
+            messagebox.showinfo("You did it!", "Congratulations! You found a clue!")
+        else:
+            messagebox.showerror("That's not it!", "Nope! Try again.")
 
 #view
 class Window:
