@@ -33,7 +33,17 @@ class Arrow:
         if self.X == 1:
             self.speaker = Speaker(self.window)
         else:
-            self.window.canvas.delete(self.speaker.idnumber)
+            try:
+                self.window.canvas.delete(self.speaker.idnumber)
+            except:
+                pass
+        if self.X == 2:
+            self.key = Key(self.window)
+        else:
+            try:
+                self.window.canvas.delete(self.key.idnumber)
+            except:
+                pass
 
 class Speaker:
     def __init__(self, window):
@@ -47,16 +57,30 @@ class Speaker:
 
     def click(self,event):
         winsound.PlaySound("C:/Users/sarah/OneDrive/Documents/CS 110/Believer.wav",winsound.SND_FILENAME)
-        clue = simpledialog.askstring("Input", "What is the name of this song?")
-        if clue == "Believer":
+        clue1 = simpledialog.askstring("Input", "What is the name of this song?")
+        if clue1 == "Believer":
             messagebox.showinfo("You did it!", "Congratulations! You found a clue!")
         else:
             messagebox.showerror("That's not it!", "Nope! Try again.")
+
+class Key:
+    def __init__(self,window):
+        self.window = window
+        self.a = 405
+        self.b = 485
+        self.c = 426
+        self.d = 520
+        self.idnumber = self.window.canvas.create_rectangle(self.a,self.b,self.c,self.d,outline = "")
+        self.window.canvas.tag_bind(self.idnumber, "<Button-1>", self.click)
+
+    def click(self,event):
+            messagebox.showinfo("Congratulations!","You've found the key!")
 
 #view
 class Window:
     def __init__(self):
         self.window = tkinter.Tk()
+        self.window.wm_title("Escape the Room")
         self.canvas = tkinter.Canvas(self.window,width=800,height=600)
         self.canvas.grid()
         basepath = "C:/Users/sarah/OneDrive/Documents/CS 110/"
