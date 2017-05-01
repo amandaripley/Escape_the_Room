@@ -1,4 +1,5 @@
 import json
+import tkinter.messagebox
 
 def openfile(mytime):
     besttime = open("besttime.json", "r").read()
@@ -8,7 +9,7 @@ def openfile(mytime):
         mykey = mydictionary[key]
 
     if(mytime <= mykey):
-        print("Your time was:", mytime, "That was your best time!")
+        tkinter.messagebox.showinfo("Thanks for playing!",("Your time was:", mytime, "That was your best time!"))
         besttime = open("besttime.json", "w")
         mynewdictionary = {"The best time is": mytime}
         towrite = json.dumps(mynewdictionary)
@@ -16,4 +17,4 @@ def openfile(mytime):
         besttime.close()
 
     else:
-        print("Try again for a better time!")
+        tkinter.messagebox.showinfo("Thanks for playing!",("Your time was:", mytime,"Try again for a better time!") )
