@@ -32,7 +32,7 @@ def openfile(mytime):
 class createending:
     def __init__(self, number):
         self.newwindow = tkinter.Tk()
-        self.window.wm_title("Escape the Room")
+        self.newwindow.wm_title("Escape the Room")
         self.number = number
         self.label = tkinter.Label(self.newwindow, text = self.number)
         self.label.pack()
