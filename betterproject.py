@@ -3,8 +3,8 @@ from tkinter import simpledialog, messagebox
 from PIL import Image, ImageTk
 import winsound
 
-cluesfound = 0
-foundkey = 0
+#cluesfound = 0
+#foundkey = 0
 
 
 #model
@@ -24,6 +24,13 @@ class Arrow:
         self.idnumber = self.window.canvas.create_polygon(self.a,self.b,self.c,fill=self.color)
         self.window.canvas.tag_bind(self.idnumber, "<Button-1>", self.click)
         self.X = X
+        if self.X == 0:
+            self.laptop = Laptop(self.window)
+        else:
+            try:
+                self.window.canvas.delete(self.laptop.idnumber)
+            except:
+                 pass
 
     def click(self, event):
         if self.direction == 'left':
@@ -55,15 +62,15 @@ class Arrow:
                 self.window.canvas.delete(self.waterbottle.idnumber)
             except:
                 pass
-        if self.X == 2 and cluesfound == 3:
+        if self.X == 2 and self.window.cluesfound == 3:
             self.key = Key(self.window)
         else:
             try:
                 self.window.canvas.delete(self.key.idnumber)
             except:
                 pass
-        if self.X == 2 and cluesfound == 3 and foundkey ==1:
-            self.door = Door(self.window)
+        #if self.X == 2 and self.window.cluesfound == 3 and self.window.keyfound ==1:
+            #self.door = Door(self.window)
 
 
 
@@ -82,10 +89,10 @@ class Speaker:
         clue1 = simpledialog.askstring("Input", "What is the name of this song?")
         if clue1 == "Believer":
             messagebox.showinfo("You did it!", "Congratulations! You found a clue!")
-            global cluesfound
-            cluesfound += 1
+            #global cluesfound
+            self.window.cluesfound += 1
             self.window.canvas.delete(self.idnumber)
-            if cluesfound == 3:
+            if self.window.cluesfound == 3:
                 messagebox.showinfo("Input","You've found all the clues! Now you can look for the key to open the door!")
 
         else:
@@ -104,10 +111,10 @@ class Laptop:
         clue2 = simpledialog.askstring("Input", "What is the name of the game you are playing right now?")
         if clue2 == "Escape the Room":
             messagebox.showinfo("You did it!", "Congratulations! You found a clue!")
-            global cluesfound
-            cluesfound += 1
+            #global cluesfound
+            self.window.cluesfound += 1
             self.window.canvas.delete(self.idnumber)
-            if cluesfound == 3:
+            if self.window.cluesfound == 3:
                 messagebox.showinfo("Input","You've found all the clues! Now you can look for the key to open the door!")
         else:
             messagebox.showerror("That's not it!", "Nope! Try again")
@@ -125,11 +132,11 @@ class WaterBottle:
     def click(self, event):
         clue3 = simpledialog.askstring("Input", "What did you just click on?")
         if clue3 == "Water Bottle":
-            global cluesfound
-            cluesfound += 1
+            #global cluesfound
+            self.window.cluesfound += 1
             messagebox.showinfo("You did it!", "Congratulation! You found a clue!")
             self.window.canvas.delete(self.idnumber)
-            if cluesfound == 3:
+            if self.window.cluesfound == 3:
                 messagebox.showinfo("Input","You've found all the clues! Now you can look for the key to open the door!")
         else:
             messagebox.showerror("That's not it!", "Nope! Try again")
@@ -146,8 +153,9 @@ class Key:
 
     def click(self,event):
             messagebox.showinfo("Congratulations!","You've found the key! Now use the door to escape!")
-            global foundkey
-            foundkey = 1
+             #foundkey
+            door = Door(self.window)
+            self.window.keyfound = 1
 
 class Door:
     def __init__(self,window):
@@ -160,12 +168,15 @@ class Door:
         self.window.canvas.tag_bind(self.idnumber, "<Button-1>", self.click)
     def click(self, event):
         messagebox.showinfo("Congratulations!", "You have escaped!!")
-        global cluesfound
-        cluesfound += 1
+        #global cluesfound
+        self.window.cluesfound += 1
+        #self.window.window.destroy()
 
 #view
 class Window:
     def __init__(self):
+        self.cluesfound = 0
+        self.keyfound = 0
         self.window = tkinter.Tk()
         self.window.wm_title("Escape the Room")
         self.canvas = tkinter.Canvas(self.window,width=800,height=600)
@@ -176,10 +187,15 @@ class Window:
         self.currentimage = self.canvas.create_image(400,300,image=self.walls[0])
         self.arrow1 = Arrow(self)
         self.arrow2 = Arrow(self,direction='right')
-        self.canvas.pack()
 
-    def mainLoop(self):
-        self.window.mainloop()
+        self.canvas.pack()
+        #if self.cluesfound == 1:
+            #self.window.destroy()
+        tkinter.mainloop()
+
+
+    #def mainLoop(self):
+        #self.window.mainloop()
 
 #controller
 #def main():
@@ -187,3 +203,4 @@ class Window:
     #window.mainLoop()
 
 #main()
+
