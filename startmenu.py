@@ -14,7 +14,7 @@ class StartMenu:
         #self.main_window.geometry("500x500")
         self.canvas = tkinter.Canvas(self.main_window, width = 800, height = 600)
         #self.canvas.grid()
-        self.image = tkinter.PhotoImage(file = "C:/Users/aripl/Documents/college/CS 110/our project/BalconyDoortoBdR.gif")
+        self.image = tkinter.PhotoImage(file = "C:/Users/aripl/Documents/college/CS 110/project1/Escape_the_Room/image1_3_.gif")
         self.canvas.create_image(400,350,image = self.image)
 
         #self.myframe = tkinter.Frame(master = self.main_window, width = 1000, height = 1000)
@@ -24,9 +24,9 @@ class StartMenu:
         self.label.pack(side = "top")
         self.tutoriallabel = tkinter.Label(self.main_window, text = "How to Play:")
         self.tutoriallabel.pack()
-        self.instructions = tkinter.Label(self.main_window, text = "Click on the Screen with the Mouse to find the Keys")
+        self.instructions = tkinter.Label(self.main_window, text = "Click on the Screen with the Mouse to find the 3 clues.  Once all 3 are found, you must find then find the key to unlock the door.")
         self.instructions.pack()
-        self.differentrooms = tkinter.Label(self.main_window, text = "Use the left and right arrow keys to look around the room")
+        self.differentrooms = tkinter.Label(self.main_window, text = "Use the left and right red arrow buttons to look around the room")
         self.differentrooms.pack()
 
         #self.b_frame = tkinter.Frame(self.main_window)
@@ -49,7 +49,7 @@ class StartMenu:
     def startgame(self):
         self.main_window.destroy()
         window = betterproject.Window()
-        betterproject.window.mainloop()
+        #betterproject.window.mainloop()
 
 
     def popup(self):
