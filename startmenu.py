@@ -24,7 +24,7 @@ class StartMenu:
         self.label.pack(side = "top")
         self.tutoriallabel = tkinter.Label(self.main_window, text = "How to Play:")
         self.tutoriallabel.pack()
-        self.instructions = tkinter.Label(self.main_window, text = "Click on the Screen with the Mouse to find the 3 clues.  Once all 3 are found, you must find then find the key to unlock the door.")
+        self.instructions = tkinter.Label(self.main_window, text = "Click on the Screen with the Mouse to find the 3 clues.  Once all 3 are found, you must then find the key to unlock the door.")
         self.instructions.pack()
         self.differentrooms = tkinter.Label(self.main_window, text = "Use the left and right red arrow buttons to look around the room")
         self.differentrooms.pack()
@@ -48,7 +48,10 @@ class StartMenu:
     #def tutorial(self):
     def startgame(self):
         self.main_window.destroy()
+        starttime = time.time()
         window = betterproject.Window()
+        elapsedtime = time.time() - starttime
+        timer.openfile(elapsedtime)
         #betterproject.window.mainloop()
 
 
@@ -60,9 +63,10 @@ class StartMenu:
             self.main_window.destroy()
 
 def main():
-    starttime = time.time()
+    #starttime = time.time()
     StartMenu()
-    elapsedtime = time.time() - starttime
-    timer.openfile(elapsedtime)
+    #elapsedtime = time.time() - starttime
+    #timer.openfile(elapsedtime)
+    #StartMenu()
 
 main()
