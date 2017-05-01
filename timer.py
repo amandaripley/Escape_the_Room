@@ -33,7 +33,8 @@ class createending:
     def __init__(self, number):
         self.newwindow = tkinter.Tk()
         self.newwindow.wm_title("Escape the Room")
+        self.customFont = font.Font(family="Gill Sans MT", size=18)
         self.number = number
-        self.label = tkinter.Label(self.newwindow, text = self.number)
+        self.label = tkinter.Label(self.newwindow, text = self.number, font = self.customFont)
         self.label.pack()
         tkinter.mainloop()
