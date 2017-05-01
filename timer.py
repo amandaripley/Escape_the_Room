@@ -1,6 +1,7 @@
 import json
 import tkinter.messagebox
 import betterproject
+from tkinter import font
 #import startmenu
 
 def openfile(mytime):
