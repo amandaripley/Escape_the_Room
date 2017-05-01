@@ -134,7 +134,7 @@ class WaterBottle:
         if clue3 == "Water Bottle":
             #global cluesfound
             self.window.cluesfound += 1
-            messagebox.showinfo("You did it!", "Congratulation! You found a clue!")
+            messagebox.showinfo("You did it!", "Congratulations! You found a clue!")
             self.window.canvas.delete(self.idnumber)
             if self.window.cluesfound == 3:
                 messagebox.showinfo("Input","You've found all the clues! Now you can look for the key to open the door!")
@@ -203,4 +203,3 @@ class Window:
     #window.mainLoop()
 
 #main()
-
