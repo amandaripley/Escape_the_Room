@@ -2,6 +2,8 @@ import tkinter
 from tkinter import simpledialog, messagebox
 from PIL import Image, ImageTk
 import winsound
+import numpy as np
+import matplotlib.pyplot as plt
 
 #cluesfound = 0
 #foundkey = 0
@@ -86,14 +88,14 @@ class Speaker:
 
     def click(self,event):
         winsound.PlaySound("C:/Users/aripl/Documents/college/CS 110/project1/Escape_the_Room/Believer.wav",winsound.SND_FILENAME)
-        clue1 = simpledialog.askstring("Input", "What is the name of this song?")
+        clue1 = simpledialog.askstring("Clue", "What is the name of this song?")
         if clue1 == "Believer":
             messagebox.showinfo("You did it!", "Congratulations! You found a clue!")
             #global cluesfound
             self.window.cluesfound += 1
             self.window.canvas.delete(self.idnumber)
             if self.window.cluesfound == 3:
-                messagebox.showinfo("Input","You've found all the clues! Now you can look for the key to open the door!")
+                messagebox.showinfo("3 Clues Found","You've found all the clues! Now you can look for the key to open the door!")
 
         else:
             messagebox.showerror("That's not it!", "Nope! Try again.")
@@ -108,14 +110,14 @@ class Laptop:
         self.window.canvas.tag_bind(self.idnumber, "<Button-1>", self.click)
 
     def click(self,event):
-        clue2 = simpledialog.askstring("Input", "What is the name of the game you are playing right now?")
-        if clue2 == "Escape the Room":
+        clue2 = simpledialog.askstring("Clue", "Why does Python live on land?")
+        if clue2 == "Because it is above C level":
             messagebox.showinfo("You did it!", "Congratulations! You found a clue!")
             #global cluesfound
             self.window.cluesfound += 1
             self.window.canvas.delete(self.idnumber)
             if self.window.cluesfound == 3:
-                messagebox.showinfo("Input","You've found all the clues! Now you can look for the key to open the door!")
+                messagebox.showinfo("All Clues Found","You've found all the clues! Now you can look for the key to open the door!")
         else:
             messagebox.showerror("That's not it!", "Nope! Try again")
 
@@ -130,16 +132,27 @@ class WaterBottle:
         self.window.canvas.tag_bind(self.idnumber, "<Button-1>", self.click)
 
     def click(self, event):
-        clue3 = simpledialog.askstring("Input", "What did you just click on?")
-        if clue3 == "Water Bottle":
+        self.image = tkinter.PhotoImage(file = "C:/Users/aripl/Documents/college/CS 110/project1/Escape_the_Room/yoda.gif")
+        self.yoda = self.window.canvas.create_image(400,300,image=self.image)
+
+        #plt.axes.get_xaxis().set_visible(False)
+        #plt.axes.get_yaxis().set_visible(False)
+        #image.imshow(ImageNumpyFormat)
+        #plt.draw()
+        #plt.pause(5)
+        #plt.close()
+        clue3 = simpledialog.askstring("Clue", "Why does Yoda's code always crash?")
+        if clue3 == "Because there is no try":
             #global cluesfound
             self.window.cluesfound += 1
             messagebox.showinfo("You did it!", "Congratulations! You found a clue!")
             self.window.canvas.delete(self.idnumber)
+            self.window.canvas.delete(self.yoda)
             if self.window.cluesfound == 3:
-                messagebox.showinfo("Input","You've found all the clues! Now you can look for the key to open the door!")
+                messagebox.showinfo("All Clues Found","You've found all the clues! Now you can look for the key to open the door!")
         else:
             messagebox.showerror("That's not it!", "Nope! Try again")
+            self.window.canvas.delete(self.yoda)
 
 class Key:
     def __init__(self,window):
@@ -170,7 +183,7 @@ class Door:
         messagebox.showinfo("Congratulations!", "You have escaped!!")
         #global cluesfound
         self.window.cluesfound += 1
-        #self.window.window.destroy()
+        self.window.destroy()
 
 #view
 class Window:
@@ -192,6 +205,9 @@ class Window:
         #if self.cluesfound == 1:
             #self.window.destroy()
         tkinter.mainloop()
+        
+    def destroy(self):
+        self.window.destroy()
 
 
     #def mainLoop(self):
